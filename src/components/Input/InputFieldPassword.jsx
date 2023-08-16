@@ -22,6 +22,7 @@ function InputFieldPassword({
   placeholder = "Enter your password",
   minLength = 4,
   maxLength = 8,
+  label = "Password",
 }) {
   // =========== USE_STATE HOOK ===============
   const [showPassword, setShowPassword] = React.useState(false);
@@ -43,10 +44,10 @@ function InputFieldPassword({
       }}
       variant="outlined"
     >
-      <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+      <InputLabel htmlFor="outlined-adornment-password">{label} *</InputLabel>
       <OutlinedInput
         id={name}
-        label="Password"
+        label={label}
         name={name}
         value={value}
         onChange={onChange}
