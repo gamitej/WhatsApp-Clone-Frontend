@@ -1,6 +1,6 @@
 import { lazy } from "react";
 import { Navigate, useRoutes } from "react-router-dom";
-import Login from "@/pages/Auth/Login";
+import Auth from "@/pages/Auth";
 import ProtectedRoute from "@/pages/Auth/ProtectedRoutes";
 
 // lazy
@@ -20,7 +20,7 @@ const Router = (props) => {
     },
     {
       path: "/auth",
-      element: <Login {...props} />,
+      element: <Auth {...props} />,
     },
     {
       path: "*",

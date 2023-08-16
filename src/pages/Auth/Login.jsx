@@ -1,39 +1,16 @@
-import { Navigate } from "react-router-dom";
-import { colorShades } from "@/utils/theme";
+import React from "react";
 import {
   InputFieldPassword,
   InputTextField,
   LoadingButton,
 } from "@/components";
-import { useState } from "react";
+import { colorShades } from "@/utils/theme";
 
-const Login = ({ isLoggedIn }) => {
-  const [inputForm, setInputForm] = useState({});
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setInputForm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    console.log(inputForm);
-    setInputForm({});
-  };
-
-  // if user is logged in
-  if (isLoggedIn) {
-    return <Navigate to="/" replace />;
-  }
-
-  /**
-   * JSX
-   */
-
+const Login = ({ handleSubmit, onChange, inputForm }) => {
   return (
-    <div className="flex w-full h-[100vh] justify-center items-center">
+    <>
       <form
-        onSubmit={handleFormSubmit}
+        onSubmit={handleSubmit}
         className="w-[30rem] rounded-lg flex flex-col items-center shadow-lg"
         style={{ backgroundColor: colorShades.grey.box }}
       >
@@ -48,7 +25,7 @@ const Login = ({ isLoggedIn }) => {
         <div className="flex flex-col items-center w-full h-[15rem] justify-evenly">
           <InputTextField
             width="75%"
-            onChange={handleInputChange}
+            onChange={onChange}
             placeholder="Enter username"
             name="username"
             value={inputForm.username || ""}
@@ -58,7 +35,7 @@ const Login = ({ isLoggedIn }) => {
             name="password"
             placeholder="Enter password"
             value={inputForm.password || ""}
-            onChange={handleInputChange}
+            onChange={onChange}
           />
         </div>
         {/* foot */}
@@ -72,7 +49,7 @@ const Login = ({ isLoggedIn }) => {
           />
         </div>
       </form>
-    </div>
+    </>
   );
 };
 
