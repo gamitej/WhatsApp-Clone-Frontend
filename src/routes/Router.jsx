@@ -4,7 +4,7 @@ import Auth from "@/pages/Auth";
 import ProtectedRoute from "@/pages/Auth/ProtectedRoutes";
 
 // lazy
-const Main = lazy(() => import("../pages/Main"));
+const Chat = lazy(() => import("../pages/Chat"));
 
 const Router = (props) => {
   const route = useRoutes([
@@ -14,7 +14,7 @@ const Router = (props) => {
       children: [
         {
           path: "/",
-          element: <Main />,
+          element: <Chat />,
         },
       ],
     },

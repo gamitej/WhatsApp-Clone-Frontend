@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import Router from "./routes/Router";
 
 function App() {
-  const isLoggedIn = false;
+  const isLoggedIn = true;
 
   return (
     <div>

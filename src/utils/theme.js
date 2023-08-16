@@ -12,6 +12,9 @@ export const colorShades = {
     box: "#202C33",
     main: "#222E35",
     dark: "#111b21",
+    text: "#D1D6D8",
+    lightText: "#4C585F",
+    input: "#2A3942",
   },
   green: {
     // light green
