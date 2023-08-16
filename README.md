@@ -8,14 +8,6 @@
 ## Setup
 
 ```
-git clone https://github.com/
-```
-
-```
-cd filename
-```
-
-```
 npm install
 ```
 
