@@ -42,7 +42,7 @@ const ChatLeftSide = ({ className = "", style }) => {
         {/* search list */}
         <div>
           {[1, 2, 3].map((item) => (
-            <div className="text-slate-300 flex items-center pl-[2rem] py-4 gap-x-[1rem]">
+            <div className="text-slate-300 flex items-center pl-[2rem] gap-x-[1rem]">
               <Avatar />
               <div
                 className="w-full py-4"
