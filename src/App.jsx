@@ -21,7 +21,7 @@ const Loading = () => {
   return (
     <div
       className="h-[90vh] w-full flex justify-center
-   items-center"
+   items-center text-white text-xl"
     >
       Loading...
     </div>

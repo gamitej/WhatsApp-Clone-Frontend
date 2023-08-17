@@ -32,6 +32,7 @@ const InputTextField = ({
           width,
           borderRadius: ".25rem",
           backgroundColor: colorShades.grey["700"],
+          color: "whitesmoke",
         }}
         required={required}
         spellCheck={false}

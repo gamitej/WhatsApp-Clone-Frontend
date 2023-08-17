@@ -1,10 +1,18 @@
 import React from "react";
-import { colorShades } from "@/utils/theme";
-import { Avatar } from "@mui/material";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+// mui
+import { Avatar, Tooltip } from "@mui/material";
+// icons
 import SearchIcon from "@mui/icons-material/Search";
+import LogoutIcon from "@mui/icons-material/Logout";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+// store
+import { useAuth } from "@/store/auth/useAuth";
+// utils
+import { colorShades } from "@/utils/theme";
 
 const ChatLeftSide = ({ className = "", style }) => {
+  const { handleLogout } = useAuth();
+
   return (
     <div className={`${className}`} style={style}>
       {/* left side top bar */}
@@ -16,12 +24,23 @@ const ChatLeftSide = ({ className = "", style }) => {
         }}
       >
         <Avatar />
-        <MoreHorizIcon
-          className="rotate-90"
-          style={{
-            borderColor: colorShades.grey.lightText,
-          }}
-        />
+        <div className="flex gap-x-2">
+          <MoreHorizIcon
+            className="rotate-90"
+            style={{
+              borderColor: colorShades.grey.lightText,
+            }}
+          />
+          <Tooltip
+            placement="top"
+            title="logout"
+            className="cursor-pointer hover:text-green-600"
+            onClick={handleLogout}
+            arrow
+          >
+            <LogoutIcon />
+          </Tooltip>
+        </div>
       </div>
       {/*left side body */}
       <div>
@@ -41,8 +60,11 @@ const ChatLeftSide = ({ className = "", style }) => {
         </div>
         {/* search list */}
         <div>
-          {[1, 2, 3].map((item) => (
-            <div className="text-slate-300 flex items-center pl-[2rem] gap-x-[1rem]">
+          {[1, 2, 3].map((item, idx) => (
+            <div
+              key={idx}
+              className="text-slate-300 flex items-center pl-[2rem] gap-x-[1rem]"
+            >
               <Avatar />
               <div
                 className="w-full py-4"

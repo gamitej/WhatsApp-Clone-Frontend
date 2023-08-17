@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Navigate } from "react-router-dom";
 // comp
 import Login from "./Login";
@@ -23,16 +23,16 @@ const Auth = ({ isLoggedIn }) => {
     e.preventDefault();
     if (switchAuth) {
       handleLogin(inputForm);
-      setInputForm({});
     } else {
       handleSignUp(inputForm);
-      setInputForm({});
     }
   };
 
   const handleAuthSwitch = () => {
     setSwitchAuth((prev) => !prev);
   };
+
+  useMemo(() => setInputForm({}), [isLoggedIn]);
 
   // if user is logged in
   if (isLoggedIn) {

@@ -7,7 +7,7 @@ const endpoint = config.baseUrl;
 
 export async function LoginApi(req) {
   try {
-    const data = await http.post(`${endpoint}/v1/login`, req);
+    const { data } = await http.post(`${endpoint}/v1/login`, req);
     return data;
   } catch (error) {
     const { response } = error;
@@ -17,7 +17,7 @@ export async function LoginApi(req) {
 
 export async function SignUpApi(req) {
   try {
-    const data = await http.post(`${endpoint}/v1/register`, req);
+    const { data } = await http.post(`${endpoint}/v1/register`, req);
     return data;
   } catch (error) {
     const { response } = error;

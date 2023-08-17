@@ -10,7 +10,13 @@ import { colorShades } from "@/utils/theme";
 import Footer from "./Footer";
 import { TextField } from "@mui/material";
 
-const SignUp = ({ onChange, inputForm, handleAuthSwitch, switchAuth }) => {
+const SignUp = ({
+  isLoading,
+  onChange,
+  inputForm,
+  handleAuthSwitch,
+  switchAuth,
+}) => {
   return (
     <>
       {/* login body */}
