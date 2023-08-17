@@ -6,6 +6,7 @@ import Login from "./Login";
 import { colorShades } from "@/utils/theme";
 import SignUp from "./SignUp";
 import { useAuth } from "@/store/auth/useAuth";
+import { toast } from "react-hot-toast";
 
 const Auth = ({ isLoggedIn }) => {
   const { handleLogin, handleSignUp, isLoading } = useAuth();
@@ -24,7 +25,11 @@ const Auth = ({ isLoggedIn }) => {
     if (switchAuth) {
       handleLogin(inputForm);
     } else {
-      handleSignUp(inputForm);
+      if (inputForm?.password === inputForm.confirmPassword) {
+        handleSignUp(inputForm);
+      } else {
+        toast.error("Password mismatch", { duration: 1500 });
+      }
     }
   };
 
