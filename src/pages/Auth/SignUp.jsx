@@ -41,6 +41,7 @@ const SignUp = ({ onChange, inputForm, handleAuthSwitch, switchAuth }) => {
       {/* footer */}
       <div className="mb-[1rem] w-full text-center">
         <LoadingButton
+          isLoading={isLoading}
           label="SignUp"
           sx={{
             backgroundColor: colorShades.green["700"],

@@ -10,7 +10,13 @@ import { colorShades } from "@/utils/theme";
 import Footer from "./Footer";
 import { TextField } from "@mui/material";
 
-const Login = ({ onChange, inputForm, handleAuthSwitch, switchAuth }) => {
+const Login = ({
+  onChange,
+  inputForm,
+  handleAuthSwitch,
+  switchAuth,
+  isLoading,
+}) => {
   return (
     <>
       {/* login body */}
@@ -33,6 +39,7 @@ const Login = ({ onChange, inputForm, handleAuthSwitch, switchAuth }) => {
       {/* footer */}
       <div className="mb-[1rem] w-full text-center">
         <LoadingButton
+          isLoading={isLoading}
           label="Login"
           sx={{
             backgroundColor: colorShades.green["700"],

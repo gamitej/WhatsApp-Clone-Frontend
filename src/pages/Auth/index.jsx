@@ -5,8 +5,10 @@ import Login from "./Login";
 // utils
 import { colorShades } from "@/utils/theme";
 import SignUp from "./SignUp";
+import { useAuth } from "@/store/auth/useAuth";
 
 const Auth = ({ isLoggedIn }) => {
+  const { handleLogin, handleSignUp, isLoading } = useAuth();
   const [inputForm, setInputForm] = useState({});
   const [switchAuth, setSwitchAuth] = useState(true);
 
@@ -19,8 +21,13 @@ const Auth = ({ isLoggedIn }) => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    console.log(inputForm);
-    setInputForm({});
+    if (switchAuth) {
+      handleLogin(inputForm);
+      setInputForm({});
+    } else {
+      handleSignUp(inputForm);
+      setInputForm({});
+    }
   };
 
   const handleAuthSwitch = () => {
@@ -57,6 +64,7 @@ const Auth = ({ isLoggedIn }) => {
             switchAuth={switchAuth}
             onChange={handleInputChange}
             handleAuthSwitch={handleAuthSwitch}
+            isLoading={isLoading}
           />
         ) : (
           <SignUp
@@ -64,6 +72,7 @@ const Auth = ({ isLoggedIn }) => {
             switchAuth={switchAuth}
             onChange={handleInputChange}
             handleAuthSwitch={handleAuthSwitch}
+            isLoading={isLoading}
           />
         )}
       </form>

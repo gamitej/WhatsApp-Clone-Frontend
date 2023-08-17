@@ -1,11 +1,14 @@
 import { Suspense } from "react";
 import Router from "./routes/Router";
+import { Toaster } from "react-hot-toast";
+import { useAuth } from "./store/auth/useAuth";
 
 function App() {
-  const isLoggedIn = true;
+  const { isLoggedIn } = useAuth();
 
   return (
     <div>
+      <Toaster position="top-center" reverseOrder={false} limit={1} />
       {/* Navbar */}
       <Suspense fallback={<Loading />}>
         <Router isLoggedIn={isLoggedIn} />
