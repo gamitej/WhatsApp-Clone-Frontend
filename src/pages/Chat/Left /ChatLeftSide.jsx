@@ -15,37 +15,11 @@ const ChatLeftSide = ({ className = "", style }) => {
 
   return (
     <div className={`${className}`} style={style}>
-      {/* left side top bar */}
-      <div
-        className="text-white h-[4rem] flex justify-between items-center px-6"
-        style={{
-          backgroundColor: colorShades.grey.main,
-          borderColor: colorShades.grey["400"],
-        }}
-      >
-        <Avatar />
-        <div className="flex gap-x-2">
-          <MoreHorizIcon
-            className="rotate-90"
-            style={{
-              borderColor: colorShades.grey.lightText,
-            }}
-          />
-          <Tooltip
-            placement="top"
-            title="logout"
-            className="cursor-pointer hover:text-green-600"
-            onClick={handleLogout}
-            arrow
-          >
-            <LogoutIcon />
-          </Tooltip>
-        </div>
-      </div>
+      <ChatLeftSideTopBar handleLogout={handleLogout} />
       {/*left side body */}
-      <div>
+      <div className="h-[calc(100%-4.5rem)]">
         {/* search user */}
-        <div className="py-2 px-3 relative">
+        <div className="py-[0.5rem] px-[0.75rem] relative">
           <SearchIcon
             className="text-slate-400 absolute top-5 left-6"
             style={{ fontSize: "1.2rem" }}
@@ -59,8 +33,8 @@ const ChatLeftSide = ({ className = "", style }) => {
           />
         </div>
         {/* search list */}
-        <div>
-          {[1, 2, 3].map((item, idx) => (
+        <div className="h-[calc(100%-3rem)] overflow-y-auto" id="scrollBar">
+          {Array.from({ length: 20 }).map((item, idx) => (
             <div
               key={idx}
               className={`text-slate-300 flex items-center pl-[2rem] gap-x-[1rem] hover:bg-slate-700 cursor-pointer`}
@@ -82,5 +56,36 @@ const ChatLeftSide = ({ className = "", style }) => {
     </div>
   );
 };
+
+function ChatLeftSideTopBar({ handleLogout }) {
+  return (
+    <div
+      className="text-white h-[4rem] flex justify-between items-center px-6"
+      style={{
+        backgroundColor: colorShades.grey.main,
+        borderColor: colorShades.grey["400"],
+      }}
+    >
+      <Avatar />
+      <div className="flex gap-x-2">
+        <MoreHorizIcon
+          className="rotate-90"
+          style={{
+            borderColor: colorShades.grey.lightText,
+          }}
+        />
+        <Tooltip
+          placement="top"
+          title="logout"
+          className="cursor-pointer hover:text-green-600"
+          onClick={handleLogout}
+          arrow
+        >
+          <LogoutIcon />
+        </Tooltip>
+      </div>
+    </div>
+  );
+}
 
 export default ChatLeftSide;
