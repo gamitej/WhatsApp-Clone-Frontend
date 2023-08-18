@@ -11,12 +11,7 @@ import { colorShades } from "@/utils/theme";
 import { messageList } from "@/data/dummyData";
 
 const ChatBody = forwardRef(({ className = "", style }, ref) => {
-  const fileInputRef = useRef(null);
   const chatContainerRef = useRef(null);
-
-  const handleSelectFile = () => {
-    fileInputRef.current.click();
-  };
 
   // chat scroll to bottom
   useEffect(() => {
@@ -31,57 +26,72 @@ const ChatBody = forwardRef(({ className = "", style }, ref) => {
    */
   return (
     <div className={`${className}`} style={style}>
-      {/* top bar */}
-      <div
-        className="text-white h-[4rem] flex justify-between items-center px-6 shadow-lg"
-        style={{
-          backgroundColor: colorShades.grey.main,
-          borderColor: colorShades.grey["400"],
-        }}
-      >
-        <div className="flex justify-center items-center gap-x-4 ">
-          <Avatar />
-          <div>
-            <p>Amitej</p>
-            <p className="text-[12px]">you</p>
-          </div>
-        </div>
+      <ChatAreaTopBar />
+      <ChatArea messageList={messageList} ref={chatContainerRef} />
+      <ChatInputField />
+    </div>
+  );
+});
 
+function ChatAreaTopBar() {
+  return (
+    <div
+      className="text-white h-[4rem] flex justify-between items-center px-6 shadow-lg"
+      style={{
+        backgroundColor: colorShades.grey.main,
+        borderColor: colorShades.grey["400"],
+      }}
+    >
+      {/* left side */}
+      <div className="flex justify-center items-center gap-x-4 ">
+        <Avatar />
         <div>
-          <MoreHorizIcon
-            className="rotate-90"
-            style={{
-              borderColor: colorShades.grey.lightText,
-            }}
-          />
+          <p>Amitej</p>
+          <p className="text-[12px]">you</p>
         </div>
       </div>
-      {/* chat area */}
-      <ChatArea messageList={messageList} ref={chatContainerRef} />
-      {/* chat input field */}
-      <div className="flex gap-x-[2rem] items-center h-[4rem] px-[2rem]">
-        <MoodIcon
-          className="text-slate-400"
+      {/* right side */}
+      <div>
+        <MoreHorizIcon
+          className="rotate-90"
           style={{
-            fontSize: "1.7rem",
+            borderColor: colorShades.grey.lightText,
           }}
-        />
-        <AttachFileIcon
-          className="text-slate-400 rotate-45 hover:text-white cursor-pointer"
-          onClick={handleSelectFile}
-        />
-        <input type="file" className="hidden" ref={fileInputRef} />
-        {/* message field */}
-        <input
-          className="outline-none px-4 py-2 rounded-lg w-[90%] text-white text-md"
-          style={{
-            backgroundColor: colorShades.grey.input,
-          }}
-          placeholder="Type a message"
         />
       </div>
     </div>
   );
-});
+}
+
+function ChatInputField() {
+  const fileInputRef = useRef(null);
+  const handleSelectFile = () => {
+    fileInputRef.current.click();
+  };
+
+  return (
+    <div className="flex gap-x-[2rem] items-center h-[4rem] px-[2rem]">
+      <MoodIcon
+        className="text-slate-400"
+        style={{
+          fontSize: "1.7rem",
+        }}
+      />
+      <AttachFileIcon
+        className="text-slate-400 rotate-45 hover:text-white cursor-pointer"
+        onClick={handleSelectFile}
+      />
+      <input type="file" className="hidden" ref={fileInputRef} />
+      {/* message field */}
+      <input
+        className="outline-none px-4 py-2 rounded-lg w-[90%] text-white text-md"
+        style={{
+          backgroundColor: colorShades.grey.input,
+        }}
+        placeholder="Type a message"
+      />
+    </div>
+  );
+}
 
 export default ChatBody;
