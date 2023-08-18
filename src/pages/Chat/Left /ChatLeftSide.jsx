@@ -37,7 +37,7 @@ const ChatLeftSide = ({ className = "", style }) => {
           {Array.from({ length: 20 }).map((item, idx) => (
             <div
               key={idx}
-              className={`text-slate-300 flex items-center pl-[2rem] gap-x-[1rem] hover:bg-slate-700 cursor-pointer`}
+              className={`text-slate-300 flex items-center pl-[1rem] gap-x-[1rem] hover:bg-slate-700 cursor-pointer`}
             >
               <Avatar />
               <div

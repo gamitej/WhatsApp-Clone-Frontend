@@ -11,28 +11,18 @@ import { colorShades } from "@/utils/theme";
 import { messageList } from "@/data/dummyData";
 import MenuModal from "@/components/Modal/MenuModal";
 
-const ChatBody = forwardRef(({ className = "", style }, ref) => {
-  const chatContainerRef = useRef(null);
-
-  // chat scroll to bottom
-  useEffect(() => {
-    if (chatContainerRef.current) {
-      chatContainerRef.current.scrollTop =
-        chatContainerRef.current.scrollHeight;
-    }
-  }, [messageList]);
-
+const ChatBody = ({ className = "", style }) => {
   /**
    * JSX
    */
   return (
     <div className={`${className}`} style={style}>
       <ChatAreaTopBar />
-      <ChatArea messageList={messageList} ref={chatContainerRef} />
+      <ChatArea messageList={messageList} />
       <ChatInputField />
     </div>
   );
-});
+};
 
 // ========================== SUB-COMP ==========================
 
@@ -89,7 +79,7 @@ function ChatInputField() {
    * JSX
    */
   return (
-    <div className="flex gap-x-[2rem] items-center h-[4rem] px-[2rem]">
+    <div className="flex gap-x-[.8rem] items-center h-[4rem] px-[1.5rem]">
       <MoodIcon
         className="text-slate-400"
         style={{
