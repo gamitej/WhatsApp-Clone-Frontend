@@ -9,6 +9,7 @@ import ChatArea from "./ChatArea";
 // utils & data
 import { colorShades } from "@/utils/theme";
 import { messageList } from "@/data/dummyData";
+import MenuModal from "@/components/Modal/MenuModal";
 
 const ChatBody = forwardRef(({ className = "", style }, ref) => {
   const chatContainerRef = useRef(null);
@@ -49,7 +50,17 @@ function ChatAreaTopBar() {
     >
       {/* left side */}
       <div className="flex justify-center items-center gap-x-4 ">
-        <Avatar />
+        <MenuModal
+          horizontal="left"
+          component={
+            <div className="w-[10rem]">
+              <p className="text-center py-2">hei</p>
+              <p className="text-center py-2">hi</p>
+            </div>
+          }
+        >
+          <Avatar />
+        </MenuModal>
         <div>
           <p>Amitej</p>
           <p className="text-[12px]">you</p>

@@ -66,7 +66,9 @@ function ChatLeftSideTopBar({ handleLogout }) {
         borderColor: colorShades.grey["400"],
       }}
     >
+      {/* left side */}
       <Avatar />
+      {/* right side */}
       <div className="flex gap-x-2">
         <MoreHorizIcon
           className="rotate-90"
