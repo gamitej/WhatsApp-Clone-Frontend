@@ -1,10 +1,14 @@
 import React, { forwardRef, useEffect, useRef } from "react";
-import { colorShades } from "@/utils/theme";
+// mui
 import { Avatar } from "@mui/material";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import MoodIcon from "@mui/icons-material/Mood";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
+// comp
 import ChatArea from "./ChatArea";
+// utils & data
+import { colorShades } from "@/utils/theme";
+import { messageList } from "@/data/dummyData";
 
 const ChatBody = forwardRef(({ className = "", style }, ref) => {
   const fileInputRef = useRef(null);
@@ -14,38 +18,7 @@ const ChatBody = forwardRef(({ className = "", style }, ref) => {
     fileInputRef.current.click();
   };
 
-  const messageList = [
-    { sender: "Amitej", time: "2:!5pm", message: "Hi anupam" },
-    { sender: "Anupam", time: "2:!7pm", message: "Hi amitej" },
-    {
-      sender: "Amitej",
-      time: "2:!5pm",
-      message: "kaisa hai ?",
-    },
-    { sender: "Amitej", time: "2:!5pm", message: "Hi anupam" },
-    { sender: "Anupam", time: "2:!7pm", message: "Hi amitej" },
-    { sender: "Amitej", time: "2:!5pm", message: "Hi anupam" },
-    { sender: "Anupam", time: "2:!7pm", message: "Hi amitej" },
-    { sender: "Amitej", time: "2:!5pm", message: "Hi anupam" },
-    { sender: "Anupam", time: "2:!7pm", message: "Hi amitej" },
-    { sender: "Amitej", time: "2:!5pm", message: "Hi anupam" },
-    { sender: "Anupam", time: "2:!7pm", message: "Hi amitej" },
-    { sender: "Amitej", time: "2:!5pm", message: "Hi anupam" },
-    { sender: "Anupam", time: "2:!7pm", message: "Hi amitej" },
-    { sender: "Amitej", time: "2:!5pm", message: "Hi anupam" },
-    { sender: "Anupam", time: "2:!7pm", message: "Hi amitej" },
-    { sender: "Amitej", time: "2:!5pm", message: "Hi anupam" },
-    { sender: "Anupam", time: "2:!7pm", message: "Hi amitej" },
-    { sender: "Amitej", time: "2:!5pm", message: "Hi anupam" },
-    { sender: "Anupam", time: "2:!7pm", message: "Hi amitej" },
-    { sender: "Amitej", time: "2:!5pm", message: "Hi anupam" },
-    { sender: "Anupam", time: "2:!7pm", message: "Hi amitej" },
-    { sender: "Amitej", time: "2:!5pm", message: "Hi anupam" },
-    { sender: "Anupam", time: "2:!7pm", message: "Hi amitej" },
-    { sender: "Amitej", time: "2:!5pm", message: "Hi anupam" },
-    { sender: "Anupam", time: "2:!7pm", message: "Hi amitej" },
-  ];
-
+  // chat scroll to bottom
   useEffect(() => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop =

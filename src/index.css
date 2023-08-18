@@ -16,6 +16,18 @@ body,
   background-position: center;
 }
 
+/* SCROLL BAR   */
+#scrollBar::-webkit-scrollbar {
+  width: 8px;
+  background-color: #202c33;
+}
+
+#scrollBar::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  --tw-bg-opacity: 1;
+  background-color: #4c585f;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
