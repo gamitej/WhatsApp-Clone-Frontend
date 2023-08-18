@@ -1,7 +1,9 @@
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 import { colorShades } from "@/utils/theme";
+import { useGlobal } from "@/store/global/useGlobal";
 
 const ChatArea = ({ messageList = [] }) => {
+  const { bgImgUrl } = useGlobal();
   const chatContainerRef = useRef(null);
   const [scrollY, setScrollY] = useState(0);
 
@@ -25,12 +27,16 @@ const ChatArea = ({ messageList = [] }) => {
     handleScrollHeight();
   }, [messageList]);
 
-  // console.log(scrollY);
   /**
    * JX
    */
   return (
-    <div className="CHAT__AREA flex relative m-auto w-full h-[calc(100%-8rem)] shadow-sm">
+    <div
+      className="CHAT__AREA flex relative m-auto w-full h-[calc(100%-8rem)] shadow-sm"
+      style={{
+        backgroundImage: bgImgUrl ? `url(${bgImgUrl})` : "none",
+      }}
+    >
       <div
         className="flex flex-col gap-y-2 p-2 w-full overflow-y-auto"
         id="scrollBar"

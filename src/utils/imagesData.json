@@ -1,0 +1,22 @@
+[
+  {
+    "name": "cat",
+    "src": "/assets/cat.jpg"
+  },
+  {
+    "name": "gray",
+    "src": "/assets/gray.jpg"
+  },
+  {
+    "name": "dark",
+    "src": "/assets/dark.jpg"
+  },
+  {
+    "name": "sky",
+    "src": "/assets/sky.jpg"
+  },
+  {
+    "name": "mountain",
+    "src": "/assets/mountain.jpg"
+  }
+]

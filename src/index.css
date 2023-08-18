@@ -11,9 +11,12 @@ body,
 }
 
 .CHAT__AREA {
-  background-image: url("/public/assets/bg-gray.jpg");
-  object-fit: cover;
+  /* background-image: url("/public/assets/sky.jpg"); */
+  background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
+  height: 100%; /* Ensure the parent container has a defined height */
+  width: 100%; /* Ensure the parent container has a defined width */
 }
 
 /* SCROLL BAR   */
