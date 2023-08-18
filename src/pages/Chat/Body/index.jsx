@@ -33,7 +33,12 @@ const ChatBody = forwardRef(({ className = "", style }, ref) => {
   );
 });
 
+// ========================== SUB-COMP ==========================
+
 function ChatAreaTopBar() {
+  /**
+   * JSX
+   */
   return (
     <div
       className="text-white h-[4rem] flex justify-between items-center px-6 shadow-lg"
@@ -69,6 +74,9 @@ function ChatInputField() {
     fileInputRef.current.click();
   };
 
+  /**
+   * JSX
+   */
   return (
     <div className="flex gap-x-[2rem] items-center h-[4rem] px-[2rem]">
       <MoodIcon

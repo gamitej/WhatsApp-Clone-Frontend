@@ -1,5 +1,5 @@
 import { colorShades } from "@/utils/theme";
-import ChatBody from "./Body/ChatBody";
+import ChatBody from "./Body";
 import ChatLeftSide from "./Left /ChatLeftSide";
 import ChatBodyEmpty from "./Sub Comp/ChatBodyEmpty";
 
