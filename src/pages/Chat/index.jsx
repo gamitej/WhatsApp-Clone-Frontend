@@ -1,7 +1,7 @@
 import { colorShades } from "@/utils/theme";
-import ChatBody from "./ChatBody";
-import ChatLeftSide from "./ChatLeftSide";
-import ChatBodyEmpty from "./ChatBodyEmpty";
+import ChatBody from "./Body/ChatBody";
+import ChatLeftSide from "./Left /ChatLeftSide";
+import ChatBodyEmpty from "./Sub Comp/ChatBodyEmpty";
 
 const Chat = ({ isChatBody = true }) => {
   return (
