@@ -5,6 +5,7 @@ import { Avatar } from "@mui/material";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { colorShades } from "@/utils/theme";
 import { BasicModal } from "@/components";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 // utils
 import imagesData from "@/utils/imagesData.json";
 import { useGlobal } from "@/store/global/useGlobal";
@@ -89,7 +90,7 @@ function TopBarModal({ handleOpenBasicModal, isOpen, setBgImgUrl, bgImgUrl }) {
             <div
               key={idx}
               onClick={() => setBgImgUrl(src)}
-              className={`col-span-3 border {} ${
+              className={`relative col-span-3 border {} ${
                 bgImgUrl === src ? "border-yellow-600" : "border-slate-500"
               } h-[8.5rem] p-[.2rem] cursor-pointer hover:border-red-300 duration-200 ease-in-out`}
             >
@@ -99,6 +100,17 @@ function TopBarModal({ handleOpenBasicModal, isOpen, setBgImgUrl, bgImgUrl }) {
                 className="h-[8rem] w-[10.5rem]"
                 style={{ objectFit: "cover" }}
               />
+              {bgImgUrl === src && (
+                <div
+                  className="absolute top-0 h-full w-full flex justify-center items-center"
+                  key={idx}
+                >
+                  <CheckCircleOutlineIcon
+                    className="text-yellow-900"
+                    style={{ fontSize: "2rem" }}
+                  />
+                </div>
+              )}
             </div>
           ))}
         </div>
