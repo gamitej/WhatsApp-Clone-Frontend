@@ -10,6 +10,12 @@ body,
   background-color: #111b21;
 }
 
+.CHAT__AREA {
+  background-image: url("/public/assets/bg-gray.jpg");
+  object-fit: cover;
+  background-position: center;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

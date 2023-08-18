@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useRef } from "react";
 import { colorShades } from "@/utils/theme";
 import { Avatar } from "@mui/material";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import MoodIcon from "@mui/icons-material/Mood";
+import AttachFileIcon from "@mui/icons-material/AttachFile";
 
 const ChatBody = ({ className = "", style }) => {
+  const fileInputRef = useRef(null);
+
+  const handleSelectFile = () => {
+    fileInputRef.current.click();
+  };
   return (
     <div className={`${className}`} style={style}>
       {/* top bar */}
@@ -33,7 +39,7 @@ const ChatBody = ({ className = "", style }) => {
         </div>
       </div>
       {/* chat area */}
-      <div className="h-[calc(100%-8rem)] bg-slate-800"></div>
+      <div className="CHAT__AREA h-[calc(100%-8rem)]"></div>
       {/* chat input field */}
       <div className="flex gap-x-[2rem] items-center h-[4rem] px-[2rem]">
         <MoodIcon
@@ -42,6 +48,13 @@ const ChatBody = ({ className = "", style }) => {
             fontSize: "1.7rem",
           }}
         />
+
+        <AttachFileIcon
+          className="text-slate-400 rotate-45 hover:text-white cursor-pointer"
+          onClick={handleSelectFile}
+        />
+        <input type="file" className="hidden" ref={fileInputRef} />
+        {/* message field */}
         <input
           className="outline-none px-4 py-2 rounded-lg w-[90%] text-white text-md"
           style={{

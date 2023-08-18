@@ -3,7 +3,7 @@ import ChatBody from "./ChatBody";
 import ChatLeftSide from "./ChatLeftSide";
 import ChatBodyEmpty from "./ChatBodyEmpty";
 
-const Chat = ({ isChatBody = false }) => {
+const Chat = ({ isChatBody = true }) => {
   return (
     <div className="flex justify-center items-center w-full h-[100vh]">
       <div className="h-[calc(100%-2.5rem)] w-[calc(100%-15rem)] flex shadow-lg">
