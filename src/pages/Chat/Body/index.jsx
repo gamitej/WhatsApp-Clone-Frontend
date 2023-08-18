@@ -1,11 +1,10 @@
 import React, { forwardRef, useEffect, useRef } from "react";
 // mui
-import { Avatar } from "@mui/material";
 import MoodIcon from "@mui/icons-material/Mood";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 // comp
 import ChatArea from "./ChatArea";
+import ChatAreaTopBar from "./ChatAreaTopBar";
 // utils & data
 import { colorShades } from "@/utils/theme";
 import { messageList } from "@/data/dummyData";
@@ -25,49 +24,6 @@ const ChatBody = ({ className = "", style }) => {
 };
 
 // ========================== SUB-COMP ==========================
-
-function ChatAreaTopBar() {
-  /**
-   * JSX
-   */
-  return (
-    <div
-      className="text-white h-[4rem] flex justify-between items-center px-6 shadow-lg"
-      style={{
-        backgroundColor: colorShades.grey.main,
-        borderColor: colorShades.grey["400"],
-      }}
-    >
-      {/* left side */}
-      <div className="flex justify-center items-center gap-x-4 ">
-        <MenuModal
-          horizontal="left"
-          component={
-            <div className="w-[10rem]">
-              <p className="text-center py-2">hei</p>
-              <p className="text-center py-2">hi</p>
-            </div>
-          }
-        >
-          <Avatar />
-        </MenuModal>
-        <div>
-          <p>Amitej</p>
-          <p className="text-[12px]">you</p>
-        </div>
-      </div>
-      {/* right side */}
-      <div>
-        <MoreHorizIcon
-          className="rotate-90"
-          style={{
-            borderColor: colorShades.grey.lightText,
-          }}
-        />
-      </div>
-    </div>
-  );
-}
 
 function ChatInputField() {
   const fileInputRef = useRef(null);
