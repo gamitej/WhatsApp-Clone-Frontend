@@ -74,7 +74,7 @@ const ChatArea = ({ messageList = [] }) => {
       {showScrollToBottom && (
         <button
           onClick={handleScrollToBottom}
-          className="absolute bottom-6 right-6 bg-slate-600 text-white p-2 rounded-full opacity-[0.7]"
+          className="absolute bottom-6 right-6 bg-slate-600 text-white p-2 rounded-full"
         >
           <KeyboardArrowDownIcon />
         </button>
