@@ -20,10 +20,10 @@ function App() {
 const Loading = () => {
   return (
     <div
-      className="h-[90vh] w-full flex justify-center
+      className="h-[100vh] w-full flex justify-center
    items-center text-white text-xl"
     >
-      Loading...
+      <img src="/public/assets/loading.gif" alt="" width={70} height={70} />
     </div>
   );
 };

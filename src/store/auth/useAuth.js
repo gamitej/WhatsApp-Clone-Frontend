@@ -1,12 +1,15 @@
+import { create } from "zustand";
+// services
 import { LoginApi, SignUpApi } from "@/services/ApiServices";
+// libs
+import { toast } from "react-hot-toast";
+// utils
 import {
   getSession,
   getSessionInfoBool,
   removeSession,
   setSession,
 } from "@/utils/session";
-import { toast } from "react-hot-toast";
-import { create } from "zustand";
 
 const USER_SESSION = "USER";
 
@@ -14,6 +17,11 @@ export const useAuth = create((set) => ({
   isLoggedIn: getSessionInfoBool(USER_SESSION) || false,
   userInfo: getSession(USER_SESSION) || {},
   isLoading: false,
+  // ============ LOGOUT ============
+  handleLogout: () => {
+    removeSession(USER_SESSION);
+    set((state) => ({ ...state, isLoggedIn: false }));
+  },
   // ============ LOGIN ============
   handleLogin: async (data) => {
     set((state) => ({ ...state, isLoading: true }));
@@ -25,6 +33,7 @@ export const useAuth = create((set) => ({
         isLoggedIn: true,
         userInfo: user,
       }));
+      // setting session data
       setSession(USER_SESSION, user);
     } else {
       toast.error(message, { duration: 1200 });
@@ -46,6 +55,7 @@ export const useAuth = create((set) => ({
         isLoggedIn: true,
         userInfo: user,
       }));
+      // setting session data
       setSession(USER_SESSION, user);
     } else {
       toast.error(message, { duration: 1200 });
@@ -55,9 +65,5 @@ export const useAuth = create((set) => ({
         isLoggedIn: false,
       }));
     }
-  },
-  handleLogout: () => {
-    removeSession(USER_SESSION);
-    set((state) => ({ ...state, isLoggedIn: false }));
   },
 }));
