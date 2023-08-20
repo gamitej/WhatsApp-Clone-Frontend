@@ -1,30 +1,54 @@
 import React, { forwardRef, useEffect, useRef, useState } from "react";
 import { colorShades } from "@/utils/theme";
 import { useGlobal } from "@/store/global/useGlobal";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const ChatArea = ({ messageList = [] }) => {
   const { bgImgUrl } = useGlobal();
   const chatContainerRef = useRef(null);
   const [scrollY, setScrollY] = useState(0);
+  const [messsageScrollY, setMessageScrollY] = useState(0);
+  const [showScrollToBottom, setShowScrollToBottom] = useState(false);
 
   // on-scroll of chat container
   const handleScroll = () => {
     if (chatContainerRef.current) {
       const scrollTop = chatContainerRef.current.scrollTop;
       setScrollY(scrollTop);
+
+      // scroll to bottom of chat container
+      if (Math.abs(messsageScrollY - scrollY) > 200) {
+        setShowScrollToBottom(true);
+      } else {
+        setShowScrollToBottom(false);
+      }
     }
   };
 
   // scroll to height of chat container
-  const handleScrollHeight = () => {
+  const handleScrollToHeight = () => {
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop =
         chatContainerRef.current.scrollHeight;
     }
   };
 
+  const handleScrollToBottom = () => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTo({
+        top: messsageScrollY,
+        behavior: "smooth",
+      });
+    }
+  };
+
   useEffect(() => {
-    handleScrollHeight();
+    handleScrollToHeight();
+
+    // scroll to bottom of chat container
+    const messageScroll = chatContainerRef.current.scrollTop;
+    setMessageScrollY(messageScroll);
+    setShowScrollToBottom(false);
   }, [messageList]);
 
   /**
@@ -47,6 +71,14 @@ const ChatArea = ({ messageList = [] }) => {
           <MessageBox key={idx} {...items} username="Amitej" />
         ))}
       </div>
+      {showScrollToBottom && (
+        <button
+          onClick={handleScrollToBottom}
+          className="absolute bottom-6 right-6 bg-slate-600 text-white p-2 rounded-full"
+        >
+          <KeyboardArrowDownIcon />
+        </button>
+      )}
     </div>
   );
 };

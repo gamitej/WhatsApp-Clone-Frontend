@@ -26,6 +26,5 @@ export const messageList = [
   { sender: "Anupam", time: "2:!7pm", message: "Hi amitej" },
   { sender: "Amitej", time: "2:!5pm", message: "Hi anupam" },
   { sender: "Anupam", time: "2:!7pm", message: "Hi amitej" },
-  { sender: "Amitej", time: "2:!5pm", message: "Hi anupam" },
-  { sender: "Anupam", time: "2:!7pm", message: "Hi amitej" },
+  { sender: "Anupam", time: "2:28pm", message: "Hi amitej" },
 ];

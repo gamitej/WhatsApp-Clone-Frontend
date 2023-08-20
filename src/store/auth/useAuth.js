@@ -14,7 +14,7 @@ import {
 const USER_SESSION = "USER";
 
 export const useAuth = create((set) => ({
-  isLoggedIn: getSessionInfoBool(USER_SESSION) || false,
+  isLoggedIn: getSessionInfoBool(USER_SESSION) || true,
   userInfo: getSession(USER_SESSION) || {},
   isLoading: false,
   // ============ LOGOUT ============
