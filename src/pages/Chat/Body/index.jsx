@@ -17,6 +17,8 @@ const ChatBody = ({ className = "", style }) => {
   const { socket } = useGlobal();
   const [messageList, setMessageList] = useState([]);
 
+  // ============== SOCKET EVENT HANDLER ================
+
   const handleSentMessage = (message) => {
     const data = {
       sender: userInfo.username,
@@ -26,17 +28,18 @@ const ChatBody = ({ className = "", style }) => {
     };
     setMessageList((prev) => [...prev, data]);
 
+    //  sent message
     socket.emit("send-chat-message", data);
   };
 
-  useEffect(() => {
-    const handleReceivedMessage = (data) => {
-      setMessageList((prevMessageList) => [...prevMessageList, data]);
-    };
+  const handleReceivedMessage = (data) => {
+    setMessageList((prevMessageList) => [...prevMessageList, data]);
+  };
 
+  useEffect(() => {
     socket.on("received-chat-message", handleReceivedMessage);
 
-    // Clean up the event listeners when the component unmounts
+    // Clean up func
     return () => {
       socket.off("received-chat-message", handleReceivedMessage);
     };
@@ -103,6 +106,7 @@ function ChatInputField({ handleSentMessage }) {
       {/* message field */}
       <input
         name="message"
+        autoComplete="off"
         value={inputMessage}
         onKeyDown={handleKeyDown}
         className="outline-none px-4 py-2 rounded-lg w-[90%] text-white text-md"
