@@ -2,9 +2,13 @@ import { Suspense } from "react";
 import Router from "./routes/Router";
 import { Toaster } from "react-hot-toast";
 import { useAuth } from "./store/auth/useAuth";
+import { useGlobal } from "./store/global/useGlobal";
 
 function App() {
   const { isLoggedIn } = useAuth();
+  // const { socket } = useGlobal();
+
+  // console.log(socket);
 
   return (
     <div>

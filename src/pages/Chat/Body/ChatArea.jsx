@@ -3,8 +3,8 @@ import { colorShades } from "@/utils/theme";
 import { useGlobal } from "@/store/global/useGlobal";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-const ChatArea = ({ messageList = [] }) => {
-  const { bgImgUrl } = useGlobal();
+const ChatArea = ({ messageList = [], username }) => {
+  const { bgImgUrl, socket } = useGlobal();
   const chatContainerRef = useRef(null);
   const [scrollY, setScrollY] = useState(0);
   const [messsageScrollY, setMessageScrollY] = useState(0);
@@ -68,7 +68,7 @@ const ChatArea = ({ messageList = [] }) => {
         onScroll={handleScroll}
       >
         {messageList.map((items, idx) => (
-          <MessageBox key={idx} {...items} username="Amitej" />
+          <MessageBox key={idx} {...items} username={username} />
         ))}
       </div>
       {showScrollToBottom && (
