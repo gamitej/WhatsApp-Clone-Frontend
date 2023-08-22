@@ -57,6 +57,8 @@ const ChatLeftSide = ({ className = "", style }) => {
   );
 };
 
+// ===================== SUB-COMP ===================
+
 function ChatLeftSideTopBar({ handleLogout }) {
   return (
     <div

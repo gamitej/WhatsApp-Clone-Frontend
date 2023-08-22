@@ -1,9 +1,27 @@
+import { useEffect } from "react";
+// utils
 import { colorShades } from "@/utils/theme";
+// comp
 import ChatBody from "./Body";
 import ChatLeftSide from "./Left/ChatLeftSide";
 import ChatBodyEmpty from "./SubComp/ChatBodyEmpty";
+// services
+import { getChats } from "@/services/ApiServices";
+import { useAuth } from "@/store/auth/useAuth";
 
 const Chat = ({ isChatBody = true }) => {
+  const { userInfo } = useAuth();
+
+  useEffect(() => {
+    const apiCall = async () => {
+      const data = await getChats(userInfo.userId);
+    };
+    apiCall();
+  }, []);
+
+  /**
+   * JSX
+   */
   return (
     <div className="flex justify-center items-center w-full h-[100vh]">
       <div className="h-[calc(100%-2.5rem)] w-[95%] sm:w-[calc(100%-2rem)] md:w-[calc(100%-5rem)] lg:w-[calc(100%-7rem)] xl:w-[calc(100%-12rem)] flex shadow-lg">

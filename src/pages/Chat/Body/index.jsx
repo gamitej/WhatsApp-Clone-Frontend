@@ -87,6 +87,11 @@ function ChatInputField({ handleSentMessage }) {
     }
   };
 
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+    // console.log(file);
+  };
+
   /**
    * JSX
    */
@@ -102,7 +107,12 @@ function ChatInputField({ handleSentMessage }) {
         className="text-slate-400 rotate-45 hover:text-white cursor-pointer"
         onClick={handleSelectFile}
       />
-      <input type="file" className="hidden" ref={fileInputRef} />
+      <input
+        type="file"
+        className="hidden"
+        ref={fileInputRef}
+        onChange={handleFileUpload}
+      />
       {/* message field */}
       <input
         name="message"
