@@ -1,5 +1,6 @@
 import config from "../../config.js";
 import http from "../../httpServices/httpServices";
+import { ErrorHandlerApi } from "@/services/httpServices/errorHandler.js";
 
 const endpoint = config.baseUrl;
 
@@ -9,7 +10,6 @@ export async function getChats(id) {
     console.log(data);
     return data;
   } catch (error) {
-    const { response } = error;
-    return response.data;
+    return ErrorHandlerApi(error);
   }
 }
