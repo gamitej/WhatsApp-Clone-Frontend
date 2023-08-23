@@ -6,9 +6,6 @@ import { useGlobal } from "./store/global/useGlobal";
 
 function App() {
   const { isLoggedIn } = useAuth();
-  // const { socket } = useGlobal();
-
-  // console.log(socket);
 
   return (
     <div>
