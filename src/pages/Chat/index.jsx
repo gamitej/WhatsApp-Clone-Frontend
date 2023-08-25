@@ -16,15 +16,17 @@ const Chat = ({ isChatBody = true }) => {
   const { setProfileImageUrl } = useGlobal();
 
   // =========== API CALLS START ===============
+
   const getProfilePic = async () => {
     try {
-      const profilePic = await getProfilePicture(userInfo.userId);
-      setProfileImageUrl(profilePic.imgUrl);
+      const profilePicResponse = await getProfilePicture(userInfo.userId);
+      if (!profilePicResponse.error)
+        setProfileImageUrl(profilePicResponse.imgUrl);
     } catch (error) {}
   };
 
   const getUserChats = async () => {
-    const data = await getChats(userInfo.userId);
+    const userChatResponse = await getChats(userInfo.userId);
   };
 
   useEffect(() => {

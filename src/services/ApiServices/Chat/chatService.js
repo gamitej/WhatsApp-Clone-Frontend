@@ -6,7 +6,7 @@ const endpoint = config.baseUrl;
 
 export async function getChats(id) {
   try {
-    const data = await http.get(`${endpoint}/v1/chat/user/${id}`);
+    const data = await http.get(`${endpoint}/v1/chat/user?userId=${id}`);
     console.log(data);
     return data;
   } catch (error) {
@@ -34,7 +34,9 @@ export async function UploadProfilePic(req) {
 // get profile picture
 export async function getProfilePicture(id) {
   try {
-    const { data } = await http.get(`${endpoint}/v1/update/profile-pic/${id}`);
+    const { data } = await http.get(
+      `${endpoint}/v1/update/profile-pic?userId=${id}`
+    );
     return data;
   } catch (error) {
     return ErrorHandlerApi(error);
