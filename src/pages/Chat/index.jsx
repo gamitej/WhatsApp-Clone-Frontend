@@ -4,20 +4,35 @@ import { colorShades } from "@/utils/theme";
 // comp
 import ChatBody from "./Body";
 import ChatLeftSide from "./Left";
-// services
-import { getChats } from "@/services/ApiServices";
-import { useAuth } from "@/store/auth/useAuth";
 import { ChatEmptyCard } from "@/components";
+// services
+import { getChats, getProfilePicture } from "@/services/ApiServices";
+// store
+import { useAuth } from "@/store/auth/useAuth";
+import { useGlobal } from "@/store/global/useGlobal";
 
 const Chat = ({ isChatBody = true }) => {
   const { userInfo } = useAuth();
+  const { setProfileImageUrl } = useGlobal();
+
+  // =========== API CALLS START ===============
+  const getProfilePic = async () => {
+    try {
+      const profilePic = await getProfilePicture(userInfo.userId);
+      setProfileImageUrl(profilePic.imgUrl);
+    } catch (error) {}
+  };
+
+  const getUserChats = async () => {
+    const data = await getChats(userInfo.userId);
+  };
 
   useEffect(() => {
-    const apiCall = async () => {
-      const data = await getChats(userInfo.userId);
-    };
-    apiCall();
+    getUserChats();
+    getProfilePic();
   }, []);
+
+  // =========== API CALLS END ===============
 
   /**
    * JSX

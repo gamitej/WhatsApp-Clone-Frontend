@@ -1,5 +1,4 @@
 import React, { forwardRef, useEffect, useRef, useState } from "react";
-;
 // comp
 import HeaderBody from "./HeaderBody";
 import MessageBody from "./MessageBody";
@@ -16,7 +15,7 @@ const ChatBody = ({ className = "", style }) => {
   const { socket } = useGlobal();
   const [messageList, setMessageList] = useState([]);
 
-  // ============== SOCKET EVENT HANDLER ================
+  // ============== SOCKET EVENT HANDLER START ================
 
   const handleSentMessage = (message) => {
     const data = {
@@ -50,6 +49,8 @@ const ChatBody = ({ className = "", style }) => {
       username: userInfo.username,
     });
   }, []);
+
+  // ============== SOCKET EVENT HANDLER END ================
 
   /**
    * JSX

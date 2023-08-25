@@ -4,23 +4,9 @@ import Router from "@/routes/Router";
 // store
 import { useAuth } from "@/store/auth/useAuth";
 import { useGlobal } from "@/store/global/useGlobal";
-// services
-import { getProfilePicture } from "@/services/ApiServices";
 
 function App() {
-  const { isLoggedIn, userInfo } = useAuth();
-  const { setProfileImageUrl } = useGlobal();
-
-  const getProfilePic = async () => {
-    try {
-      const profilePic = await getProfilePicture(userInfo.userId);
-      setProfileImageUrl(profilePic.imgUrl);
-    } catch (error) {}
-  };
-
-  useEffect(() => {
-    getProfilePic();
-  }, []);
+  const { isLoggedIn } = useAuth();
 
   /**
    * JSX
