@@ -4,12 +4,14 @@ import { BasicModal } from "@/components";
 import MenuModal from "@/components/Modal/MenuModal";
 // mui
 import { Avatar, Button, Tooltip } from "@mui/material";
-// icons
 import LogoutIcon from "@mui/icons-material/Logout";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+// utils
 import { colorShades } from "@/utils/theme";
+// store
 import { useAuth } from "@/store/auth/useAuth";
 import { useGlobal } from "@/store/global/useGlobal";
+// service
 import { UploadProfilePic } from "@/services/ApiServices";
 
 export default function HeaderLeft({ handleLogout }) {
@@ -24,7 +26,7 @@ export default function HeaderLeft({ handleLogout }) {
     useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  // ============ EVENT-HANDLERS ==================
+  // ============ EVENT-HANDLERS START ==================
 
   const handleUpdateProfile = () => {
     setIsUpdateProfileModalOpen((prev) => !prev);
@@ -33,9 +35,11 @@ export default function HeaderLeft({ handleLogout }) {
   const handleProfilePictureUpload = () => {
     uploadPictureRef.current.click();
   };
+  // ============ EVENT-HANDLERS END ==================
+  // ============ API CALLS START ==================
 
-  // update profile picture in server
-  const updateProfileInDb = async (src) => {
+  // api for update profile picture in server
+  const updateProfileInDatabase = async (src) => {
     const { token, userId } = userInfo;
     const req = { profilePicUrl: src, token, userId };
     try {
@@ -45,7 +49,7 @@ export default function HeaderLeft({ handleLogout }) {
     } catch (error) {}
   };
 
-  // get profile url from cloudinary
+  // api call for getting profile url from cloudinary
   const callPictureUploadApi = async (data) => {
     try {
       const res = await fetch(import.meta.env.VITE_CLOUDINARY_API_URL, {
@@ -53,7 +57,8 @@ export default function HeaderLeft({ handleLogout }) {
         body: data,
       });
       const responseData = await res.json();
-      await updateProfileInDb(responseData.url);
+      // api for update profile picture in server
+      await updateProfileInDatabase(responseData.url);
     } catch (error) {
       console.log(error);
     }
@@ -61,6 +66,7 @@ export default function HeaderLeft({ handleLogout }) {
 
   const handleSubmitPicture = () => {
     setIsLoading(true);
+    // cloudinary api data
     const data = new FormData();
     data.append("file", uploadPic);
     data.append("upload_preset", "whatsapp-img");
@@ -68,6 +74,8 @@ export default function HeaderLeft({ handleLogout }) {
     // cloudinary pic upload api call
     callPictureUploadApi(data);
   };
+
+  // ============ API CALLS END ==================
 
   /**
    * JSX
@@ -81,7 +89,6 @@ export default function HeaderLeft({ handleLogout }) {
       }}
     >
       {/*============ Top Left Side  ============*/}
-
       <MenuModal
         horizontal="left"
         component={
@@ -100,11 +107,10 @@ export default function HeaderLeft({ handleLogout }) {
             className="cursor-pointer"
             src={profileImageUrl === "" ? "" : profileImageUrl}
           />
-
           <span className="text-sm">You</span>
         </div>
       </MenuModal>
-      {/* =========== Picture Upload Model =========== */}
+      {/* =========== Picture Upload Model Start =========== */}
       <BasicModal
         open={isUpdateProfileModalOpen}
         key="updateProfile"
@@ -148,6 +154,7 @@ export default function HeaderLeft({ handleLogout }) {
           </div>
         </div>
       </BasicModal>
+      {/* =========== Picture Upload Model End =========== */}
       {/* =========== Top Right Side  ============== */}
       <div className="flex gap-x-2">
         <MoreHorizIcon
