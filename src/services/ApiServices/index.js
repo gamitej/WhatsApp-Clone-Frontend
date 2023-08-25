@@ -1,4 +1,8 @@
 import { LoginApi, SignUpApi } from "./Auth/loginService";
-import { getChats } from "./Chat/chatService";
+import {
+  getChats,
+  UploadProfilePic,
+  getProfilePicture,
+} from "./Chat/chatService";
 
-export { LoginApi, SignUpApi, getChats };
+export { LoginApi, SignUpApi, getChats, UploadProfilePic, getProfilePicture };

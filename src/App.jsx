@@ -1,12 +1,30 @@
-import { Suspense } from "react";
-import Router from "./routes/Router";
+import { Suspense, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
-import { useAuth } from "./store/auth/useAuth";
-import { useGlobal } from "./store/global/useGlobal";
+import Router from "@/routes/Router";
+// store
+import { useAuth } from "@/store/auth/useAuth";
+import { useGlobal } from "@/store/global/useGlobal";
+// services
+import { getProfilePicture } from "@/services/ApiServices";
 
 function App() {
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, userInfo } = useAuth();
+  const { setProfileImageUrl } = useGlobal();
 
+  const getProfilePic = async () => {
+    try {
+      const profilePic = await getProfilePicture(userInfo.userId);
+      setProfileImageUrl(profilePic.imgUrl);
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    getProfilePic();
+  }, []);
+
+  /**
+   * JSX
+   */
   return (
     <div>
       <Toaster position="top-center" reverseOrder={false} limit={1} />
@@ -17,6 +35,8 @@ function App() {
     </div>
   );
 }
+
+// =========== LOADING-COMP ==============
 
 const Loading = () => {
   return (

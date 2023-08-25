@@ -8,12 +8,21 @@ import { Avatar, Button, Tooltip } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { colorShades } from "@/utils/theme";
+import { useAuth } from "@/store/auth/useAuth";
+import { useGlobal } from "@/store/global/useGlobal";
+import { UploadProfilePic } from "@/services/ApiServices";
 
 export default function TopBar({ handleLogout }) {
+  // STORE VARIABLES
+  const { userInfo } = useAuth();
+  const { profileImageUrl, setProfileImageUrl } = useGlobal();
+
+  // USE-STATE
   const uploadPictureRef = useRef(null);
   const [uploadPic, setUploadPic] = useState("");
   const [isUpdateProfileModalOpen, setIsUpdateProfileModalOpen] =
     useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   // ============ EVENT-HANDLERS ==================
 
@@ -25,19 +34,33 @@ export default function TopBar({ handleLogout }) {
     uploadPictureRef.current.click();
   };
 
+  // update profile picture in server
+  const updateProfileInDb = async (src) => {
+    const { token, userId } = userInfo;
+    const req = { profilePicUrl: src, token, userId };
+    try {
+      const res = await UploadProfilePic(req);
+      setProfileImageUrl(src);
+      setIsLoading(false);
+    } catch (error) {}
+  };
+
+  // get profile url from cloudinary
   const callPictureUploadApi = async (data) => {
     try {
       const res = await fetch(import.meta.env.VITE_CLOUDINARY_API_URL, {
         method: "POST",
         body: data,
       });
-      console.log(res);
+      const responseData = await res.json();
+      await updateProfileInDb(responseData.url);
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleSubmitPicture = () => {
+    setIsLoading(true);
     const data = new FormData();
     data.append("file", uploadPic);
     data.append("upload_preset", "whatsapp-img");
@@ -72,7 +95,10 @@ export default function TopBar({ handleLogout }) {
           </div>
         }
       >
-        <Avatar className="cursor-pointer" />
+        <Avatar
+          className="cursor-pointer"
+          src={profileImageUrl === "" ? "" : profileImageUrl}
+        />
       </MenuModal>
       {/* =========== Picture Upload Model =========== */}
       <BasicModal
@@ -111,8 +137,9 @@ export default function TopBar({ handleLogout }) {
               color="success"
               variant="contained"
               onClick={handleSubmitPicture}
+              disabled={isLoading}
             >
-              Submit
+              {isLoading ? "Loading..." : "Submit"}
             </Button>
           </div>
         </div>
