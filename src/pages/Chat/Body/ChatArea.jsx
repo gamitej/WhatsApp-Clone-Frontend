@@ -69,8 +69,42 @@ const ChatArea = ({ messageList = [], username }) => {
         ref={chatContainerRef}
         onScroll={handleScroll}
       >
-        {messageList.map((items, idx) => (
-          <MessageBox key={idx} {...items} username={username} />
+        {messageList.map(({ sender, message, time }, idx) => (
+          <React.Fragment key={idx}>
+            {/* ======== Your Message ======== */}
+            {sender === username && (
+              <div className="w-full flex justify-end">
+                <div className="bg-green-900 text-sm text-white px-2 py-1 rounded-md max-w-[95%]">
+                  <p>
+                    <span className="text-[11px] block capitalize">
+                      {sender}
+                    </span>
+                    {message}
+                    <span className="text-[11px] block">{time}</span>
+                  </p>
+                </div>
+              </div>
+            )}
+            {/* ======== Other Message ======== */}
+            {sender !== username && (
+              <div className="w-full flex justify-start">
+                <div
+                  className="text-white text-sm px-2 py-1 rounded-md max-w-[95%]"
+                  style={{
+                    backgroundColor: colorShades.grey.input,
+                  }}
+                >
+                  <p>
+                    <span className="text-[10px] block capitalize">
+                      {sender}
+                    </span>
+                    {message}
+                    <span className="text-[10px] block">{time}</span>
+                  </p>
+                </div>
+              </div>
+            )}
+          </React.Fragment>
         ))}
       </div>
       {showScrollToBottom && (
@@ -84,43 +118,5 @@ const ChatArea = ({ messageList = [], username }) => {
     </div>
   );
 };
-
-// ===================== SUB-COMP =======================
-
-function MessageBox({ time, message, sender, username }) {
-  return (
-    <>
-      {/* ======== Your Message ======== */}
-      {sender === username && (
-        <div className="w-full flex justify-end">
-          <div className="bg-green-900 text-sm text-white px-2 py-1 rounded-md max-w-[95%]">
-            <p>
-              <span className="text-[11px] block capitalize">{sender}</span>
-              {message}
-              <span className="text-[11px] block">{time}</span>
-            </p>
-          </div>
-        </div>
-      )}
-      {/* ======== Other Message ======== */}
-      {sender !== username && (
-        <div className="w-full flex justify-start">
-          <div
-            className="text-white text-sm px-2 py-1 rounded-md max-w-[95%]"
-            style={{
-              backgroundColor: colorShades.grey.input,
-            }}
-          >
-            <p>
-              <span className="text-[10px] block capitalize">{sender}</span>
-              {message}
-              <span className="text-[10px] block">{time}</span>
-            </p>
-          </div>
-        </div>
-      )}
-    </>
-  );
-}
 
 export default ChatArea;

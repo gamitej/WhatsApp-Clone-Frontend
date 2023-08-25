@@ -4,7 +4,7 @@ import MoodIcon from "@mui/icons-material/Mood";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 // comp
 import ChatArea from "./ChatArea";
-import ChatAreaTopBar from "./ChatAreaTopBar";
+import BodyHeader from "./BodyHeader";
 // utils & data
 import { colorShades } from "@/utils/theme";
 // import { messageList } from "@/data/dummyData";
@@ -57,7 +57,7 @@ const ChatBody = ({ className = "", style }) => {
    */
   return (
     <div className={`${className}`} style={style}>
-      <ChatAreaTopBar />
+      <BodyHeader />
       <ChatArea messageList={messageList} username={userInfo?.username} />
       <ChatInputField handleSentMessage={handleSentMessage} />
     </div>

@@ -10,7 +10,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import imagesData from "@/utils/imagesData.json";
 import { useGlobal } from "@/store/global/useGlobal";
 
-function ChatAreaTopBar() {
+function BodyHeader() {
   const { bgImgUrl, setBgImgUrl } = useGlobal();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -125,4 +125,4 @@ function BackgroundChangeModal({
     </BasicModal>
   );
 }
-export default ChatAreaTopBar;
+export default BodyHeader;
