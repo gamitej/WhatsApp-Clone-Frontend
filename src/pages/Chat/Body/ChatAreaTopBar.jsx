@@ -14,7 +14,7 @@ function ChatAreaTopBar() {
   const { bgImgUrl, setBgImgUrl } = useGlobal();
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleOpenBasicModal = () => {
+  const changeBackgroundModal = () => {
     setIsOpen((prev) => !prev);
   };
   /**
@@ -30,11 +30,11 @@ function ChatAreaTopBar() {
     >
       {/* left side */}
       <div className="flex justify-center items-center gap-x-4 ">
-        <TopBarModal
+        <BackgroundChangeModal
           isOpen={isOpen}
           bgImgUrl={bgImgUrl}
           setBgImgUrl={setBgImgUrl}
-          handleOpenBasicModal={handleOpenBasicModal}
+          changeBackgroundModal={changeBackgroundModal}
         />
         <MenuModal
           horizontal="left"
@@ -44,7 +44,7 @@ function ChatAreaTopBar() {
                 View Profile
               </p>
               <p
-                onClick={handleOpenBasicModal}
+                onClick={changeBackgroundModal}
                 className="text-center text-white py-2 hover:bg-slate-700 cursor-pointer"
               >
                 Change Background
@@ -72,12 +72,17 @@ function ChatAreaTopBar() {
   );
 }
 
-function TopBarModal({ handleOpenBasicModal, isOpen, setBgImgUrl, bgImgUrl }) {
+function BackgroundChangeModal({
+  changeBackgroundModal,
+  isOpen,
+  setBgImgUrl,
+  bgImgUrl,
+}) {
   return (
     <BasicModal
       open={isOpen}
-      handleClose={handleOpenBasicModal}
-      onClose={handleOpenBasicModal}
+      handleClose={changeBackgroundModal}
+      onClose={changeBackgroundModal}
       height="25rem"
       width="35rem"
     >
