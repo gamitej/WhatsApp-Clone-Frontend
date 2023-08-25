@@ -18,7 +18,7 @@ const ChatLeftSide = ({ className = "", style }) => {
   return (
     <div className={`${className}`} style={style}>
       <TopBar handleLogout={handleLogout} />
-      {/*left side body */}
+      {/* ============= Left Side Body =========== */}
       <div className="h-[calc(100%-4.5rem)]">
         {/* search user */}
         <div className="py-[0.5rem] px-[0.75rem] relative">
@@ -58,7 +58,5 @@ const ChatLeftSide = ({ className = "", style }) => {
     </div>
   );
 };
-
-// ===================== SUB-COMP ===================
 
 export default ChatLeftSide;

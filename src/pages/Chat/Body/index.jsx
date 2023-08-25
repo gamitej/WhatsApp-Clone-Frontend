@@ -89,7 +89,6 @@ function ChatInputField({ handleSentMessage }) {
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
-    // console.log(file);
   };
 
   /**
@@ -113,7 +112,7 @@ function ChatInputField({ handleSentMessage }) {
         ref={fileInputRef}
         onChange={handleFileUpload}
       />
-      {/* message field */}
+      {/* ========== Message Field ============= */}
       <input
         name="message"
         autoComplete="off"

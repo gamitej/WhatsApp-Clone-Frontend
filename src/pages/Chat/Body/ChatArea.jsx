@@ -10,6 +10,8 @@ const ChatArea = ({ messageList = [], username }) => {
   const [messsageScrollY, setMessageScrollY] = useState(0);
   const [showScrollToBottom, setShowScrollToBottom] = useState(false);
 
+  // ================ EVENT-HANDLER ==================
+
   // on-scroll of chat container
   const handleScroll = () => {
     if (chatContainerRef.current) {
@@ -88,7 +90,7 @@ const ChatArea = ({ messageList = [], username }) => {
 function MessageBox({ time, message, sender, username }) {
   return (
     <>
-      {/* Your Message */}
+      {/* ======== Your Message ======== */}
       {sender === username && (
         <div className="w-full flex justify-end">
           <div className="bg-green-900 text-sm text-white px-2 py-1 rounded-md max-w-[95%]">
@@ -100,7 +102,7 @@ function MessageBox({ time, message, sender, username }) {
           </div>
         </div>
       )}
-      {/* Other Message */}
+      {/* ======== Other Message ======== */}
       {sender !== username && (
         <div className="w-full flex justify-start">
           <div

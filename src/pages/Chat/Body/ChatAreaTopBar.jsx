@@ -28,7 +28,7 @@ function ChatAreaTopBar() {
         borderColor: colorShades.grey["400"],
       }}
     >
-      {/* left side */}
+      {/* ============== Top Left Side  ============== */}
       <div className="flex justify-center items-center gap-x-4 ">
         <BackgroundChangeModal
           isOpen={isOpen}
@@ -59,7 +59,7 @@ function ChatAreaTopBar() {
           <p className="text-[12px]">you</p>
         </div>
       </div>
-      {/* right side */}
+      {/*============= Top Right Side =========== */}
       <div>
         <MoreHorizIcon
           className="rotate-90"
@@ -71,6 +71,8 @@ function ChatAreaTopBar() {
     </div>
   );
 }
+
+// ============== SUB-COMP ================
 
 function BackgroundChangeModal({
   changeBackgroundModal,
