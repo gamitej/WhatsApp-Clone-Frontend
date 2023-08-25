@@ -4,10 +4,10 @@ import { colorShades } from "@/utils/theme";
 // comp
 import ChatBody from "./Body";
 import ChatLeftSide from "./Left/ChatLeftSide";
-import ChatBodyEmpty from "./SubComp/ChatBodyEmpty";
 // services
 import { getChats } from "@/services/ApiServices";
 import { useAuth } from "@/store/auth/useAuth";
+import { ChatEmptyCard } from "@/components";
 
 const Chat = ({ isChatBody = true }) => {
   const { userInfo } = useAuth();
@@ -39,7 +39,7 @@ const Chat = ({ isChatBody = true }) => {
         )}
         {/* chat body when no chat selected */}
         {!isChatBody && (
-          <ChatBodyEmpty
+          <ChatEmptyCard
             className="w-[100%] sm:w-[55%] md:w-[70%] h-full flex flex-col justify-center items-center gap-y-[3rem]"
             style={{
               backgroundColor: colorShades.grey.main,

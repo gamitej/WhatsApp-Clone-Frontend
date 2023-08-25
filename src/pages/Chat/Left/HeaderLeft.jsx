@@ -12,7 +12,7 @@ import { useAuth } from "@/store/auth/useAuth";
 import { useGlobal } from "@/store/global/useGlobal";
 import { UploadProfilePic } from "@/services/ApiServices";
 
-export default function TopBar({ handleLogout }) {
+export default function HeaderLeft({ handleLogout }) {
   // STORE VARIABLES
   const { userInfo } = useAuth();
   const { profileImageUrl, setProfileImageUrl } = useGlobal();

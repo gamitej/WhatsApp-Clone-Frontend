@@ -3,7 +3,7 @@ import { colorShades } from "@/utils/theme";
 import { useGlobal } from "@/store/global/useGlobal";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-const ChatArea = ({ messageList = [], username }) => {
+const MessageBody = ({ messageList = [], username }) => {
   const { bgImgUrl, socket } = useGlobal();
   const chatContainerRef = useRef(null);
   const [scrollY, setScrollY] = useState(0);
@@ -119,4 +119,4 @@ const ChatArea = ({ messageList = [], username }) => {
   );
 };
 
-export default ChatArea;
+export default MessageBody;

@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import TopBar from "./TopBar";
+import HeaderLeft from "./HeaderLeft";
 // mui
 import { Avatar, Button, Tooltip } from "@mui/material";
 // icons
@@ -17,10 +17,11 @@ const ChatLeftSide = ({ className = "", style }) => {
 
   return (
     <div className={`${className}`} style={style}>
-      <TopBar handleLogout={handleLogout} />
-      {/* ============= Left Side Body =========== */}
+      {/* ========= Left Top Side ========= */}
+      <HeaderLeft handleLogout={handleLogout} />
+      {/* ========= Left Top Body Side ========= */}
       <div className="h-[calc(100%-4.5rem)]">
-        {/* search user */}
+        {/* Search User */}
         <div className="py-[0.5rem] px-[0.75rem] relative">
           <SearchIcon
             className="text-slate-400 absolute top-5 left-6"
@@ -34,7 +35,7 @@ const ChatLeftSide = ({ className = "", style }) => {
             placeholder="search or start new chat"
           />
         </div>
-        {/* search list */}
+        {/* Search List */}
         <div className="h-[calc(100%-3rem)] overflow-y-auto" id="scrollBar">
           {Array.from({ length: 20 }).map((item, idx) => (
             <div

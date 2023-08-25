@@ -1,7 +1,7 @@
 import { colorShades } from "@/utils/theme";
 import React from "react";
 
-const ChatBodyEmpty = ({ className = "", style }) => {
+const ChatEmptyCard = ({ className = "", style }) => {
   return (
     <div className={className} style={style}>
       <span className="-mt-[4rem]">
@@ -120,4 +120,4 @@ const ChatBodyEmpty = ({ className = "", style }) => {
   );
 };
 
-export default ChatBodyEmpty;
+export default ChatEmptyCard;
