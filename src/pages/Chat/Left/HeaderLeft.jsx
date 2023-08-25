@@ -13,6 +13,7 @@ import { useAuth } from "@/store/auth/useAuth";
 import { useGlobal } from "@/store/global/useGlobal";
 // service
 import { UploadProfilePic } from "@/services/ApiServices";
+import { toast } from "react-hot-toast";
 
 export default function HeaderLeft({ handleLogout }) {
   // STORE VARIABLES
@@ -22,19 +23,29 @@ export default function HeaderLeft({ handleLogout }) {
   // USE-STATE
   const uploadPictureRef = useRef(null);
   const [uploadPic, setUploadPic] = useState("");
-  const [isUpdateProfileModalOpen, setIsUpdateProfileModalOpen] =
+  const [isProfileUploadModalOpen, setIsProfileUploadModalOpen] =
     useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   // ============ EVENT-HANDLERS START ==================
 
-  const handleUpdateProfile = () => {
-    setIsUpdateProfileModalOpen((prev) => !prev);
+  const profileUploadModal = () => {
+    setIsProfileUploadModalOpen((prev) => !prev);
   };
 
-  const handleProfilePictureUpload = () => {
+  const profileUploadModalRef = () => {
     uploadPictureRef.current.click();
   };
+
+  const handleProfileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file?.type?.startsWith("image/")) {
+      toast.error("Uploaded file is not an image.", { duration: 2500 });
+    } else {
+      setUploadPic(e.target.files[0]);
+    }
+  };
+
   // ============ EVENT-HANDLERS END ==================
   // ============ API CALLS START ==================
 
@@ -45,8 +56,12 @@ export default function HeaderLeft({ handleLogout }) {
     try {
       const res = await UploadProfilePic(req);
       setProfileImageUrl(src);
+      toast.success("Image uploaded Successfully", { duration: 1200 });
       setIsLoading(false);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+      toast.error("Unable to uploaded image", { duration: 1200 });
+    }
   };
 
   // api call for getting profile url from cloudinary
@@ -65,14 +80,18 @@ export default function HeaderLeft({ handleLogout }) {
   };
 
   const handleSubmitPicture = () => {
-    setIsLoading(true);
-    // cloudinary api data
-    const data = new FormData();
-    data.append("file", uploadPic);
-    data.append("upload_preset", "whatsapp-img");
-    data.append("cloud_name", "dkmwsnfpy");
-    // cloudinary pic upload api call
-    callPictureUploadApi(data);
+    if (uploadPic !== "") {
+      setIsLoading(true);
+      // cloudinary api data
+      const data = new FormData();
+      data.append("file", uploadPic);
+      data.append("upload_preset", "whatsapp-img");
+      data.append("cloud_name", "dkmwsnfpy");
+      // cloudinary pic upload api call
+      callPictureUploadApi(data);
+    } else {
+      toast.error("Please upload image", { duration: 1200 });
+    }
   };
 
   // ============ API CALLS END ==================
@@ -94,7 +113,7 @@ export default function HeaderLeft({ handleLogout }) {
         component={
           <div className="w-[13rem]">
             <p
-              onClick={handleUpdateProfile}
+              onClick={profileUploadModal}
               className="text-center text-white py-2 hover:bg-slate-700 cursor-pointer"
             >
               Profile Pic
@@ -112,10 +131,10 @@ export default function HeaderLeft({ handleLogout }) {
       </MenuModal>
       {/* =========== Picture Upload Model Start =========== */}
       <BasicModal
-        open={isUpdateProfileModalOpen}
+        open={isProfileUploadModalOpen}
         key="updateProfile"
-        handleClose={handleUpdateProfile}
-        onClose={handleUpdateProfile}
+        handleClose={profileUploadModal}
+        onClose={profileUploadModal}
         width="35rem"
         height="15rem"
       >
@@ -126,19 +145,27 @@ export default function HeaderLeft({ handleLogout }) {
           <div className="flex justify-center items-center gap-4 mt-4">
             <Button
               variant="contained"
-              onClick={handleProfilePictureUpload}
+              onClick={profileUploadModalRef}
               color="success"
             >
               Upload{" "}
             </Button>
             <p className="text-white text-lg">
               {uploadPic ? uploadPic.name : "No file uploaded"}
+              {uploadPic && (
+                <button
+                  onClick={() => setUploadPic("")}
+                  className="text-sm bg-red-500 p-1 rounded-md font-semibold ml-4"
+                >
+                  clear
+                </button>
+              )}
             </p>
             <input
               ref={uploadPictureRef}
               type="file"
               className="hidden"
-              onChange={(e) => setUploadPic(e.target.files[0])}
+              onChange={handleProfileChange}
             />
           </div>
           <div className="w-[80%] mt-8">
