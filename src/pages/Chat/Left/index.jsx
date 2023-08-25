@@ -12,8 +12,12 @@ import { colorShades } from "@/utils/theme";
 import MenuModal from "@/components/Modal/MenuModal";
 import { BasicModal, LoadingButton } from "@/components";
 
-const ChatLeftSide = ({ className = "", style }) => {
+const ChatLeftSide = ({ className = "", style, setIsChatSelected }) => {
   const { handleLogout } = useAuth();
+
+  const selectedUserChats = () => {
+    setIsChatSelected(true);
+  };
 
   return (
     <div className={`${className}`} style={style}>
@@ -40,6 +44,7 @@ const ChatLeftSide = ({ className = "", style }) => {
           {Array.from({ length: 20 }).map((item, idx) => (
             <div
               key={idx}
+              onClick={selectedUserChats}
               className={`text-slate-300 flex items-center pl-[1rem] gap-x-[1rem] hover:bg-slate-700 cursor-pointer`}
             >
               <Avatar />

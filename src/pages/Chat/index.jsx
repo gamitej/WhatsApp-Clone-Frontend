@@ -11,9 +11,9 @@ import { getChats, getProfilePicture } from "@/services/ApiServices";
 import { useAuth } from "@/store/auth/useAuth";
 import { useGlobal } from "@/store/global/useGlobal";
 
-const Chat = ({ isChatBody = true }) => {
+const Chat = () => {
   const { userInfo } = useAuth();
-  const { setProfileImageUrl } = useGlobal();
+  const { setProfileImageUrl, isChatSelected, setIsChatSelected } = useGlobal();
 
   // =========== API CALLS START ===============
 
@@ -43,9 +43,12 @@ const Chat = ({ isChatBody = true }) => {
     <div className="flex justify-center items-center w-full h-[100vh]">
       <div className="h-[calc(100%-2.5rem)] w-[95%] sm:w-[calc(100%-2rem)] md:w-[calc(100%-5rem)] lg:w-[calc(100%-7rem)] xl:w-[calc(100%-12rem)] flex shadow-lg">
         {/* ========== Chat Left Side ====== */}
-        <ChatLeftSide className="hidden sm:block sm:w-[45%] md:w-[30%] h-full" />
+        <ChatLeftSide
+          className="hidden sm:block sm:w-[45%] md:w-[30%] h-full"
+          setIsChatSelected={setIsChatSelected}
+        />
         {/* ========== Chat Body ========== */}
-        {isChatBody ? (
+        {isChatSelected ? (
           <ChatBody
             className="w-[100%] sm:w-[55%] md:w-[70%] h-full"
             style={{
