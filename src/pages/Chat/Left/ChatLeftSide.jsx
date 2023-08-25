@@ -48,8 +48,8 @@ const ChatLeftSide = ({ className = "", style }) => {
                   borderBottom: `0.5px solid ${colorShades.grey["800"]}`,
                 }}
               >
-                <p>Amitej</p>
-                <p className="text-[12px]">you</p>
+                <p>Other</p>
+                <p className="text-[12px]">message</p>
               </div>
             </div>
           ))}

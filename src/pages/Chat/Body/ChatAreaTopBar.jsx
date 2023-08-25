@@ -55,8 +55,8 @@ function ChatAreaTopBar() {
           <Avatar className="cursor-pointer" />
         </MenuModal>
         <div>
-          <p>Amitej</p>
-          <p className="text-[12px]">you</p>
+          <p>Other</p>
+          <p className="text-[12px]">online/offline</p>
         </div>
       </div>
       {/*============= Top Right Side =========== */}

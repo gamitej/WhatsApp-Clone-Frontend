@@ -95,10 +95,14 @@ export default function TopBar({ handleLogout }) {
           </div>
         }
       >
-        <Avatar
-          className="cursor-pointer"
-          src={profileImageUrl === "" ? "" : profileImageUrl}
-        />
+        <div className="flex justify-center items-center gap-4">
+          <Avatar
+            className="cursor-pointer"
+            src={profileImageUrl === "" ? "" : profileImageUrl}
+          />
+
+          <span className="text-sm">You</span>
+        </div>
       </MenuModal>
       {/* =========== Picture Upload Model =========== */}
       <BasicModal
