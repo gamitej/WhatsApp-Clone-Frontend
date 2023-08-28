@@ -10,7 +10,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import imagesData from "@/utils/imagesData.json";
 import { useGlobal } from "@/store/global/useGlobal";
 
-function HeaderBody() {
+function HeaderBody({ isTyping }) {
   const { bgImgUrl, setBgImgUrl } = useGlobal();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -56,7 +56,9 @@ function HeaderBody() {
         </MenuModal>
         <div>
           <p>Other</p>
-          <p className="text-[12px]">online/offline</p>
+          <p className="text-[12px]">
+            {isTyping ? "typing..." : "online/offline"}
+          </p>
         </div>
       </div>
       {/*============= Top Right Side =========== */}

@@ -14,6 +14,8 @@ const ChatBody = ({ className = "", style }) => {
   const { userInfo } = useAuth();
   const { socket } = useGlobal();
   const [messageList, setMessageList] = useState([]);
+  const [typing, setTyping] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
 
   // ============== SOCKET EVENT HANDLER START ================
 
@@ -34,12 +36,25 @@ const ChatBody = ({ className = "", style }) => {
     setMessageList((prevMessageList) => [...prevMessageList, data]);
   };
 
+  const handleUserTyping = () => {
+    setIsTyping(true);
+  };
+
+  const handleUserStoppedTyping = () => {
+    setIsTyping(false);
+  };
+
   useEffect(() => {
     socket.on("received-chat-message", handleReceivedMessage);
+
+    socket.on("userTyping", handleUserTyping);
+    socket.on("userStoppedTyping", handleUserStoppedTyping);
 
     // Clean up func
     return () => {
       socket.off("received-chat-message", handleReceivedMessage);
+      socket.off("userTyping", handleUserTyping);
+      socket.off("userStoppedTyping", handleUserStoppedTyping);
     };
   }, [socket]);
 
@@ -57,9 +72,14 @@ const ChatBody = ({ className = "", style }) => {
    */
   return (
     <div className={`${className}`} style={style}>
-      <HeaderBody />
+      <HeaderBody isTyping={isTyping} />
       <MessageBody messageList={messageList} username={userInfo?.username} />
-      <MessageInputField handleSentMessage={handleSentMessage} />
+      <MessageInputField
+        typing={typing}
+        socket={socket}
+        setTyping={setTyping}
+        handleSentMessage={handleSentMessage}
+      />
     </div>
   );
 };

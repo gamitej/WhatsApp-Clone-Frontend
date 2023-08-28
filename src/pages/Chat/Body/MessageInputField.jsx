@@ -3,8 +3,9 @@ import { useRef, useState } from "react";
 import MoodIcon from "@mui/icons-material/Mood";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import { colorShades } from "@/utils/theme";
+import { LocalConvenienceStoreOutlined } from "@mui/icons-material";
 
-function MessageInputField({ handleSentMessage }) {
+function MessageInputField({ handleSentMessage, setTyping, typing, socket }) {
   const [inputMessage, setInputMessage] = useState("");
 
   // file upload
@@ -16,10 +17,32 @@ function MessageInputField({ handleSentMessage }) {
   const handleInputChange = (e) => {
     const value = e.target.value;
     setInputMessage(e.target.value);
+
+    if (!typing) {
+      setTyping(true);
+      socket.emit("typing", {
+        roomId: 1234,
+      });
+    }
+
+    let lastTypingTime = new Date().getTime();
+    var timerLength = 3000;
+    setTimeout(() => {
+      var timeNow = new Date().getTime();
+      var timeDiff = timeNow - lastTypingTime;
+
+      if (timeDiff >= timerLength && typing) {
+        socket.emit("stop typing", {
+          roomId: 1234,
+        });
+        setTyping(false);
+      }
+    }, timerLength);
   };
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
+      socket.emit("stop typing", { roomId: 1234 });
       if (inputMessage.trim() !== "") handleSentMessage(inputMessage.trim());
       setInputMessage("");
     }
