@@ -6,28 +6,35 @@ import { colorShades } from "@/utils/theme";
 import { LocalConvenienceStoreOutlined } from "@mui/icons-material";
 
 function MessageInputField({ handleSentMessage, setTyping, typing, socket }) {
+  const fileInputRef = useRef(null);
+  const [timeoutId, setTimeoutId] = useState(null);
   const [inputMessage, setInputMessage] = useState("");
 
   // file upload
-  const fileInputRef = useRef(null);
   const handleSelectFile = () => {
     fileInputRef.current.click();
   };
 
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setInputMessage(e.target.value);
+  const handleFileUpload = (e) => {
+    const file = e.target.files[0];
+  };
 
+  // calling socket for typing indication
+  const handleTyping = () => {
     if (!typing) {
       setTyping(true);
       socket.emit("typing", {
         roomId: 1234,
       });
     }
+    // Clear the previous timeout if exists
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
 
-    let lastTypingTime = new Date().getTime();
     var timerLength = 3000;
-    setTimeout(() => {
+    let lastTypingTime = new Date().getTime();
+    const newTimeoutId = setTimeout(() => {
       var timeNow = new Date().getTime();
       var timeDiff = timeNow - lastTypingTime;
 
@@ -38,6 +45,14 @@ function MessageInputField({ handleSentMessage, setTyping, typing, socket }) {
         setTyping(false);
       }
     }, timerLength);
+    setTimeoutId(newTimeoutId);
+  };
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setInputMessage(e.target.value);
+    // calling socket for typing indication
+    handleTyping();
   };
 
   const handleKeyDown = (e) => {
@@ -46,10 +61,6 @@ function MessageInputField({ handleSentMessage, setTyping, typing, socket }) {
       if (inputMessage.trim() !== "") handleSentMessage(inputMessage.trim());
       setInputMessage("");
     }
-  };
-
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
   };
 
   /**
