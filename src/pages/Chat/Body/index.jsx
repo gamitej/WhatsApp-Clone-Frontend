@@ -63,6 +63,10 @@ const ChatBody = ({ className = "", style }) => {
       roomId: 1234,
       username: userInfo.username,
     });
+
+    return () => {
+      socket.disconnect();
+    };
   }, []);
 
   // ============== SOCKET EVENT HANDLER END ================

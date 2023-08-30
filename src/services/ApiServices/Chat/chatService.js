@@ -19,7 +19,7 @@ export async function UploadProfilePic(req) {
   const { token } = req;
   try {
     const { data } = await http.post(
-      `${endpoint}/v1/update/upload-profile-pic`,
+      `${endpoint}/v1/user/upload-profile-pic`,
       req,
       {
         headers: { Authorization: `Bearer ${token}` },
@@ -35,7 +35,7 @@ export async function UploadProfilePic(req) {
 export async function getProfilePicture(id) {
   try {
     const { data } = await http.get(
-      `${endpoint}/v1/update/profile-pic?userId=${id}`
+      `${endpoint}/v1/user/profile-pic?userId=${id}`
     );
     return data;
   } catch (error) {

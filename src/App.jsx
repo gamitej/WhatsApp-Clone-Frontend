@@ -3,7 +3,6 @@ import { Toaster } from "react-hot-toast";
 import Router from "@/routes/Router";
 // store
 import { useAuth } from "@/store/auth/useAuth";
-import { useGlobal } from "@/store/global/useGlobal";
 
 function App() {
   const { isLoggedIn } = useAuth();
